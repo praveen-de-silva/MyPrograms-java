@@ -2,25 +2,44 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        /* -----------------
+         *      Ex : 01
+         * ----------------- 
+         */
 
-        System.out.println("5 secs to enter ur name.");
+        // Scanner scan = new Scanner(System.in);
 
-        for (int i=1; i<=5; i++) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println("Thread interrupted: " + e.getMessage());
-            }
+        // MyRunnable myRunnable = new MyRunnable();
+        // Thread thread = new Thread(myRunnable);
+        // thread.setDaemon(true);
+        // thread.start();
 
-            if (i==5) {
-                System.out.println("Times up");
-            }
+        // System.out.println("5 secs to enter ur name.");
+        // System.out.print("Enter ur name : ");
+        // String name = scan.nextLine();
+
+        // System.out.println("Hello " + name);
+        
+        // scan.close();
+  
+        /* -----------------
+         *      Ex : 02
+         * ----------------- 
+         */
+
+        Thread threadMT1 = new Thread(new MultiThreading("Head"));
+        Thread threadMT2 = new Thread(new MultiThreading("Tail"));
+
+        System.out.println("Game Start!");
+        threadMT1.start();
+        threadMT2.start();
+
+        try {
+            threadMT1.join();
+            threadMT2.join();
+        } catch (InterruptedException e) {
+            System.out.println("Main method was interupted.");
         }
-
-        System.out.print("Enter ur name : ");
-        String name = scan.nextLine();
-        System.out.println("Hello " + name);
-        scan.close();
+        System.out.println("Game Over!");
     }
 }
